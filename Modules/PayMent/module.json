@@ -1,0 +1,13 @@
+{
+    "name": "PayMent",
+    "alias": "payment",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\PayMent\\Providers\\PayMentServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

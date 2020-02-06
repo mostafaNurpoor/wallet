@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'wallet'] , function (){
-    Route::get('/test',  'WalletController@test' );
+Route::group(['prefix' => 'wallet' , 'middleware' => 'auth:api'] , function (){
+
+    Route::post('/charge',  'WalletController@chargeWallet' );
+
 });
 //
 //Route::group(['prefix' => 'messages' , 'middleware' => 'auth:api'], function () {
@@ -32,17 +33,3 @@ Route::group(['prefix' => 'wallet'] , function (){
 //
 //});
 //
-//Route::group([
-//    'prefix' => 'auth'
-//], function () {
-//    Route::post('login', 'AuthController@logIn');
-//    Route::post('signup', 'AuthController@signup');
-//
-//    Route::group([
-//        'middleware' => 'auth:api'
-//    ], function () {
-//        Route::get('logout', 'AuthController@logout');
-//        Route::get('user', 'AuthController@userData');
-//    });
-//});
-

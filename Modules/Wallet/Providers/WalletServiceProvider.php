@@ -5,11 +5,8 @@ namespace Modules\Wallet\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-use Modules\Wallet\Repositories\walletRepository;
-use Modules\Wallet\Repositories\walletRepositoryImpl;
-
-use Modules\Wallet\Repositories\UserRepository;
-use Modules\Wallet\Repositories\UserRepositoryImpl;
+use Modules\Wallet\Repositories\Wallet\WalletRepository;
+use Modules\Wallet\Repositories\Wallet\walletRepositoryImpl;
 
 class WalletServiceProvider extends ServiceProvider
 {
@@ -25,14 +22,6 @@ class WalletServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Wallet', 'Database/Migrations'));
-        $this->app->bind(
-            WalletRepository::class,
-            WalletRepositoryImpl::class
-        );
-        $this->app->bind(
-            UserRepository::class,
-            UserRepositoryImpl::class
-        );
     }
 
     /**
@@ -43,6 +32,11 @@ class WalletServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->bind(
+            WalletRepository::class,
+            WalletRepositoryImpl::class
+        );
     }
 
     /**

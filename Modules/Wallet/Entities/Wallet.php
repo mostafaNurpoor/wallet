@@ -21,6 +21,6 @@ class Wallet extends Model
     const updatedAt = 'updated_at' ;
 
     protected $fillable = [
-
+        'user_id' , 'remain' , 'status'
     ];
 }

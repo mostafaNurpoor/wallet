@@ -5,18 +5,8 @@ namespace Modules\Wallet\Repositories\Wallet ;
 use App\User;
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Exceptions\WalletException;
-use Modules\Wallet\Repositories\Transaction\TransactionRepository ;
 
 class WalletRepositoryImpl implements walletRepository {
-
-    public $transactionRepository ;
-
-    public function __construct(TransactionRepository $transactionRepository)
-    {
-
-        $this->transactionRepository = $transactionRepository ;
-
-    }
 
     public function chargeWallet($userId, $amount)
     {
@@ -27,17 +17,14 @@ class WalletRepositoryImpl implements walletRepository {
             throw new WalletException(__(Error::DB_Item_Not_Found));
         }
 
-        $wallet = Wallet::where(Wallet::userId , $userId)->first();
+   //   $wallet = Wallet::where(Wallet::userId , $userId)->get();
 
-        if (!$wallet){
+//        if ($wallet->exists()){
+//
+//        }
+//        $status = $item->save();
 
-            throw new WalletException(__(Error::DB_Item_Not_Found));
-
-        }
-
-        $wallet->increment($wallet->{Wallet::remain} , $amount);
-
-        return $wallet ;
+     //   return $wallet->exists() ;
 
     }
 

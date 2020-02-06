@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -26,7 +27,7 @@ class User extends Authenticatable
     const updatedAt = 'updated_at' ;
 
     // token passport
-    const secretToken = '6nYwgIJVPCx6VgS0wDOB528SztQ62JikwJB16qBI';
+    const secretToken = 't51vrQkWSZ06dUDb3a3jebPziMM2kbOf9ax7IZYA';
 
     const clientId = '2';
 
@@ -56,5 +57,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [ ];
+
+    public function findForPassport($username)
+    {
+        return $this->where('phone_number', $username)->first();
+    }
+
+    public function validateForPassportPasswordGrant($password)
+    {
+        return (Hash::check($password, $this->OTP));
+    }
 
 }

@@ -18,6 +18,10 @@ Route::group(['prefix' => 'transaction' , 'middleware' => 'auth:api'], function 
 
     Route::post('/create' , 'TransactionController@create');
 
-    Route::post('/verify' , 'TransactionController@verify');
+    Route::get('/userTransactions/{page}' , 'TransactionController@userTransactions');
+
+    Route::any('/verify/{paymentId}' , 'TransactionController@verify');
+
+    Route::post('/provideIntegers' , 'TransactionController@gateWaysCallBacks');
 
 });

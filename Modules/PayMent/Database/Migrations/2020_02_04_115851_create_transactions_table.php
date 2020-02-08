@@ -17,10 +17,10 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('price');
-            $table->string('authority');
             $table->smallInteger('status');
             $table->string('reference_type');
             $table->integer('reference_id');
+            $table->string('transaction_tracking_id');
             $table->timestamps();
         });
     }

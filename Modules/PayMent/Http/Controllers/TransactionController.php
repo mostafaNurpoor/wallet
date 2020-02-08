@@ -3,13 +3,10 @@
 namespace Modules\PayMent\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\PayMent\Repositories\Transaction\TransactionRepository;
 use App\Http\Responses\GeneralResponse ;
-use Shetabit\Payment\Facade\Payment;
-use Shetabit\Payment\Invoice;
 
 class TransactionController extends Controller
 {
@@ -17,29 +14,36 @@ class TransactionController extends Controller
 
     public function __construct(TransactionRepository $transactionRepository)
     {
+
         $this->transactionRepository = $transactionRepository ;
 
     }
 
     public function create(Request $request)
     {
-        $transaction = $this->transactionRepository->create(Auth::id() , $request->price , $request->referenceType , $request->referenceId);
 
-        //return GeneralResponse::success($transaction);
+        $transaction = $this->transactionRepository->create(Auth::id() , $request->price , $request->referenceType , $request->referenceId);
 
         return $transaction ;
 
     }
 
-    public function verify(Request $request){
+    public function userTransactions($page)
+    {
+
+        $userTransaction = $this->transactionRepository->all(Auth::id() , $page);
+
+        return GeneralResponse::success($userTransaction);
 
     }
 
-//    public function executeStrategy(array $elements): array
-//    {
-//        uasort($elements, [$this->comparator, 'authority']);
-//
-//        return $elements;
-//    }
+    public function verify($paymentId)
+    {
+
+        $userTransaction = $this->transactionRepository->verify($paymentId);
+
+        return GeneralResponse::success($userTransaction);
+
+    }
 
 }

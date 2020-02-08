@@ -12,7 +12,7 @@ class transaction extends Model
 
     const price = 'price' ;
 
-    const authority = 'authority' ;
+    const transactionTrackingId = 'transaction_tracking_id' ;
 
     const status = 'status' ;
 
@@ -24,18 +24,18 @@ class transaction extends Model
 
     const updatedAt = 'updated_at' ;
 
-
     // bank api configuration
 
     const merchantID = 'e6f68636-04b6-11ea-9e2c-000c295eb8fc' ;
 
-    const callBackUrl = 'http://www.signaltime.ir/dashboard/pay/verify.php' ;
+    const callBackUrl = 'http://f9138f9d.ngrok.io/laravel/wallet/public/api/transaction/verify' ;
 
-    // zarinpal url
+    const driver = 'zarinpal';
 
-    const zarinPalUrl = 'https://www.zarinpal.com/pg/services/WebGate/wsdl';
+    //authority
 
     protected $fillable = [
-        'user_id', 'price', 'authority' , 'status' , 'reference_type' , 'reference_id'
+        'user_id', 'price' , 'transaction_tracking_id' , 'status' , 'reference_type' , 'reference_id'
     ];
+
 }
